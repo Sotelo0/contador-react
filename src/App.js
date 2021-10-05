@@ -1,25 +1,33 @@
+import React, { useEffect, useState } from "react";
 import logo from './logo.svg';
 import './App.css';
+import axios from "axios";
 
-function App() {
+function Contador() {
+
+  const sContador = () => {
+    
+    axios.get('https://api.duda.co/api/sites/multiscreen/14557a2c/collection/clicks', {
+      headers: { 
+        'Accept': 'application/json', 
+        'Content-Type': 'application/json', 
+        'Authorization': 'Bearer ZDIzOTYwYmY1MTpaRnlqQTVzVzdYSW8='
+      }
+    }).then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button onClick={sContador}>
+        Incrementar contador
+      </button>
     </div>
-  );
+  )
 }
 
-export default App;
+export default Contador;
